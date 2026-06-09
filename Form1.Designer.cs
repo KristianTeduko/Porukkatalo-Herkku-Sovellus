@@ -33,406 +33,408 @@ namespace pien_herkun_softa
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.Nettisivu = new System.Windows.Forms.LinkLabel();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnGeneratePdf = new System.Windows.Forms.Button();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.lblReceiver = new System.Windows.Forms.Label();
-            this.txtDate = new System.Windows.Forms.TextBox();
-            this.txtReceiver = new System.Windows.Forms.TextBox();
-            this.dgvPreview = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPreview)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.websiteLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.tabPDF = new System.Windows.Forms.TabPage();
+            this.previewGrid = new System.Windows.Forms.DataGridView();
+            this.textBoxReceiver = new System.Windows.Forms.TextBox();
+            this.textBoxDate = new System.Windows.Forms.TextBox();
+            this.recieverLabel = new System.Windows.Forms.Label();
+            this.dateLabel = new System.Windows.Forms.Label();
+            this.generatePDFButton = new System.Windows.Forms.Button();
+            this.backPDFButton = new System.Windows.Forms.Button();
+            this.tabEditProduct = new System.Windows.Forms.TabPage();
+            this.backEditButton = new System.Windows.Forms.Button();
+            this.euroLabelReccomended = new System.Windows.Forms.Label();
+            this.euroLabelOriginal = new System.Windows.Forms.Label();
+            this.editAddButton = new System.Windows.Forms.Button();
+            this.reccomendedPriceLabel = new System.Windows.Forms.Label();
+            this.originalPriceLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.textBoxReccomendedPrice = new System.Windows.Forms.TextBox();
+            this.textBoxOriginalPrice = new System.Windows.Forms.TextBox();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.tabProductList = new System.Windows.Forms.TabPage();
+            this.productList = new System.Windows.Forms.ListView();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.printButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.editButton = new System.Windows.Forms.Button();
+            this.tabMain = new System.Windows.Forms.TabControl();
+            this.tabPDF.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewGrid)).BeginInit();
+            this.tabEditProduct.SuspendLayout();
+            this.tabProductList.SuspendLayout();
+            this.tabMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Nettisivu
+            // websiteLinkLabel
             // 
-            this.Nettisivu.AutoSize = true;
-            this.Nettisivu.Location = new System.Drawing.Point(15, 744);
-            this.Nettisivu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Nettisivu.Name = "Nettisivu";
-            this.Nettisivu.Size = new System.Drawing.Size(75, 13);
-            this.Nettisivu.TabIndex = 10;
-            this.Nettisivu.TabStop = true;
-            this.Nettisivu.Text = "Netin Tuotteet";
-            this.Nettisivu.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Nettisivu_LinkClicked);
+            this.websiteLinkLabel.AutoSize = true;
+            this.websiteLinkLabel.Location = new System.Drawing.Point(20, 916);
+            this.websiteLinkLabel.Name = "websiteLinkLabel";
+            this.websiteLinkLabel.Size = new System.Drawing.Size(90, 16);
+            this.websiteLinkLabel.TabIndex = 10;
+            this.websiteLinkLabel.TabStop = true;
+            this.websiteLinkLabel.Text = "Netin Tuotteet";
+            this.websiteLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Nettisivu_LinkClicked);
             // 
-            // tabPage3
+            // tabPDF
             // 
-            this.tabPage3.Controls.Add(this.dgvPreview);
-            this.tabPage3.Controls.Add(this.txtReceiver);
-            this.tabPage3.Controls.Add(this.txtDate);
-            this.tabPage3.Controls.Add(this.lblReceiver);
-            this.tabPage3.Controls.Add(this.lblDate);
-            this.tabPage3.Controls.Add(this.btnGeneratePdf);
-            this.tabPage3.Controls.Add(this.btnBack);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage3.Size = new System.Drawing.Size(1036, 709);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Tulostus";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPDF.Controls.Add(this.previewGrid);
+            this.tabPDF.Controls.Add(this.textBoxReceiver);
+            this.tabPDF.Controls.Add(this.textBoxDate);
+            this.tabPDF.Controls.Add(this.recieverLabel);
+            this.tabPDF.Controls.Add(this.dateLabel);
+            this.tabPDF.Controls.Add(this.generatePDFButton);
+            this.tabPDF.Controls.Add(this.backPDFButton);
+            this.tabPDF.Location = new System.Drawing.Point(4, 25);
+            this.tabPDF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPDF.Name = "tabPDF";
+            this.tabPDF.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPDF.Size = new System.Drawing.Size(1732, 1104);
+            this.tabPDF.TabIndex = 2;
+            this.tabPDF.Text = "Tulostus";
+            this.tabPDF.UseVisualStyleBackColor = true;
             // 
-            // btnBack
+            // previewGrid
             // 
-            this.btnBack.Location = new System.Drawing.Point(834, 75);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(197, 39);
-            this.btnBack.TabIndex = 4;
-            this.btnBack.Text = "Takaisin";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.previewGrid.AllowUserToAddRows = false;
+            this.previewGrid.AllowUserToDeleteRows = false;
+            this.previewGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.previewGrid.ColumnHeadersHeight = 32;
+            this.previewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.previewGrid.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.previewGrid.Location = new System.Drawing.Point(7, 148);
+            this.previewGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.previewGrid.Name = "previewGrid";
+            this.previewGrid.RowHeadersWidth = 51;
+            this.previewGrid.RowTemplate.Height = 32;
+            this.previewGrid.Size = new System.Drawing.Size(1368, 720);
+            this.previewGrid.TabIndex = 0;
             // 
-            // btnGeneratePdf
+            // textBoxReceiver
             // 
-            this.btnGeneratePdf.Location = new System.Drawing.Point(834, 5);
-            this.btnGeneratePdf.Name = "btnGeneratePdf";
-            this.btnGeneratePdf.Size = new System.Drawing.Size(197, 64);
-            this.btnGeneratePdf.TabIndex = 3;
-            this.btnGeneratePdf.Text = "Luo PDF";
-            this.btnGeneratePdf.UseVisualStyleBackColor = true;
-            this.btnGeneratePdf.Click += new System.EventHandler(this.btnGeneratePdf_Click);
+            this.textBoxReceiver.Location = new System.Drawing.Point(185, 17);
+            this.textBoxReceiver.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxReceiver.Name = "textBoxReceiver";
+            this.textBoxReceiver.Size = new System.Drawing.Size(399, 22);
+            this.textBoxReceiver.TabIndex = 1;
             // 
-            // lblDate
+            // textBoxDate
             // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(11, 54);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(66, 13);
-            this.lblDate.TabIndex = 4;
-            this.lblDate.Text = "Päivämäärä:";
+            this.textBoxDate.Location = new System.Drawing.Point(185, 60);
+            this.textBoxDate.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxDate.Name = "textBoxDate";
+            this.textBoxDate.Size = new System.Drawing.Size(199, 22);
+            this.textBoxDate.TabIndex = 2;
             // 
-            // lblReceiver
+            // recieverLabel
             // 
-            this.lblReceiver.AutoSize = true;
-            this.lblReceiver.Location = new System.Drawing.Point(11, 19);
-            this.lblReceiver.Name = "lblReceiver";
-            this.lblReceiver.Size = new System.Drawing.Size(75, 13);
-            this.lblReceiver.TabIndex = 3;
-            this.lblReceiver.Text = "Vastaanottaja:";
+            this.recieverLabel.AutoSize = true;
+            this.recieverLabel.Location = new System.Drawing.Point(15, 23);
+            this.recieverLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.recieverLabel.Name = "recieverLabel";
+            this.recieverLabel.Size = new System.Drawing.Size(93, 16);
+            this.recieverLabel.TabIndex = 3;
+            this.recieverLabel.Text = "Vastaanottaja:";
             // 
-            // txtDate
+            // dateLabel
             // 
-            this.txtDate.Location = new System.Drawing.Point(139, 49);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(150, 20);
-            this.txtDate.TabIndex = 2;
-            this.txtDate.TextChanged += new System.EventHandler(this.txtDate_TextChanged);
+            this.dateLabel.AutoSize = true;
+            this.dateLabel.Location = new System.Drawing.Point(15, 66);
+            this.dateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(84, 16);
+            this.dateLabel.TabIndex = 4;
+            this.dateLabel.Text = "Päivämäärä:";
             // 
-            // txtReceiver
+            // generatePDFButton
             // 
-            this.txtReceiver.Location = new System.Drawing.Point(139, 14);
-            this.txtReceiver.Name = "txtReceiver";
-            this.txtReceiver.Size = new System.Drawing.Size(300, 20);
-            this.txtReceiver.TabIndex = 1;
+            this.generatePDFButton.Location = new System.Drawing.Point(1112, 6);
+            this.generatePDFButton.Margin = new System.Windows.Forms.Padding(4);
+            this.generatePDFButton.Name = "generatePDFButton";
+            this.generatePDFButton.Size = new System.Drawing.Size(263, 79);
+            this.generatePDFButton.TabIndex = 3;
+            this.generatePDFButton.Text = "Luo PDF";
+            this.generatePDFButton.UseVisualStyleBackColor = true;
+            this.generatePDFButton.Click += new System.EventHandler(this.generatePDFButton_Click);
             // 
-            // dgvPreview
+            // backPDFButton
             // 
-            this.dgvPreview.AllowUserToAddRows = false;
-            this.dgvPreview.AllowUserToDeleteRows = false;
-            this.dgvPreview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPreview.Location = new System.Drawing.Point(5, 120);
-            this.dgvPreview.Name = "dgvPreview";
-            this.dgvPreview.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            this.dgvPreview.Size = new System.Drawing.Size(1026, 585);
-            this.dgvPreview.ColumnHeadersHeight = 32;
-            this.dgvPreview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvPreview.RowTemplate.Height = 32;
-            this.dgvPreview.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            this.dgvPreview.TabIndex = 0;
+            this.backPDFButton.Location = new System.Drawing.Point(1112, 92);
+            this.backPDFButton.Margin = new System.Windows.Forms.Padding(4);
+            this.backPDFButton.Name = "backPDFButton";
+            this.backPDFButton.Size = new System.Drawing.Size(263, 48);
+            this.backPDFButton.TabIndex = 4;
+            this.backPDFButton.Text = "Takaisin";
+            this.backPDFButton.UseVisualStyleBackColor = true;
+            this.backPDFButton.Click += new System.EventHandler(this.backPDFButton_Click);
             // 
-            // tabPage2
+            // tabEditProduct
             // 
-            this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.textBox4);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1036, 709);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Lisää / Muokkaa";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabEditProduct.Controls.Add(this.backEditButton);
+            this.tabEditProduct.Controls.Add(this.euroLabelReccomended);
+            this.tabEditProduct.Controls.Add(this.euroLabelOriginal);
+            this.tabEditProduct.Controls.Add(this.editAddButton);
+            this.tabEditProduct.Controls.Add(this.reccomendedPriceLabel);
+            this.tabEditProduct.Controls.Add(this.originalPriceLabel);
+            this.tabEditProduct.Controls.Add(this.nameLabel);
+            this.tabEditProduct.Controls.Add(this.textBoxReccomendedPrice);
+            this.tabEditProduct.Controls.Add(this.textBoxOriginalPrice);
+            this.tabEditProduct.Controls.Add(this.textBoxName);
+            this.tabEditProduct.Location = new System.Drawing.Point(4, 25);
+            this.tabEditProduct.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabEditProduct.Name = "tabEditProduct";
+            this.tabEditProduct.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabEditProduct.Size = new System.Drawing.Size(1732, 1104);
+            this.tabEditProduct.TabIndex = 1;
+            this.tabEditProduct.Text = "Lisää / Muokkaa";
+            this.tabEditProduct.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // backEditButton
             // 
-            this.textBox1.Location = new System.Drawing.Point(214, 63);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(130, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.backEditButton.Location = new System.Drawing.Point(457, 314);
+            this.backEditButton.Margin = new System.Windows.Forms.Padding(4);
+            this.backEditButton.Name = "backEditButton";
+            this.backEditButton.Size = new System.Drawing.Size(312, 78);
+            this.backEditButton.TabIndex = 11;
+            this.backEditButton.Text = "Takaisin";
+            this.backEditButton.UseVisualStyleBackColor = true;
+            this.backEditButton.Click += new System.EventHandler(this.backEditButton_Click);
             // 
-            // textBox3
+            // euroLabelReccomended
             // 
-            this.textBox3.Location = new System.Drawing.Point(214, 87);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(130, 20);
-            this.textBox3.TabIndex = 2;
+            this.euroLabelReccomended.AutoSize = true;
+            this.euroLabelReccomended.Location = new System.Drawing.Point(723, 145);
+            this.euroLabelReccomended.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.euroLabelReccomended.Name = "euroLabelReccomended";
+            this.euroLabelReccomended.Size = new System.Drawing.Size(14, 16);
+            this.euroLabelReccomended.TabIndex = 10;
+            this.euroLabelReccomended.Text = "€";
             // 
-            // textBox4
+            // euroLabelOriginal
             // 
-            this.textBox4.Location = new System.Drawing.Point(214, 110);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(130, 20);
-            this.textBox4.TabIndex = 3;
+            this.euroLabelOriginal.AutoSize = true;
+            this.euroLabelOriginal.Location = new System.Drawing.Point(723, 116);
+            this.euroLabelOriginal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.euroLabelOriginal.Name = "euroLabelOriginal";
+            this.euroLabelOriginal.Size = new System.Drawing.Size(14, 16);
+            this.euroLabelOriginal.TabIndex = 9;
+            this.euroLabelOriginal.Text = "€";
             // 
-            // label1
+            // editAddButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(182, 68);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Nimi:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.editAddButton.Location = new System.Drawing.Point(457, 197);
+            this.editAddButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.editAddButton.Name = "editAddButton";
+            this.editAddButton.Size = new System.Drawing.Size(312, 111);
+            this.editAddButton.TabIndex = 8;
+            this.editAddButton.Text = "Lisää / Muokkaa";
+            this.editAddButton.UseVisualStyleBackColor = true;
+            this.editAddButton.Click += new System.EventHandler(this.editAddButton_Click);
             // 
-            // label3
+            // reccomendedPriceLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(153, 92);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Tukkuhinta:";
+            this.reccomendedPriceLabel.AutoSize = true;
+            this.reccomendedPriceLabel.Location = new System.Drawing.Point(447, 145);
+            this.reccomendedPriceLabel.Name = "reccomendedPriceLabel";
+            this.reccomendedPriceLabel.Size = new System.Drawing.Size(89, 16);
+            this.reccomendedPriceLabel.TabIndex = 7;
+            this.reccomendedPriceLabel.Text = "Suositushinta:";
             // 
-            // label4
+            // originalPriceLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(142, 115);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Suositushinta:";
+            this.originalPriceLabel.AutoSize = true;
+            this.originalPriceLabel.Location = new System.Drawing.Point(462, 116);
+            this.originalPriceLabel.Name = "originalPriceLabel";
+            this.originalPriceLabel.Size = new System.Drawing.Size(75, 16);
+            this.originalPriceLabel.TabIndex = 6;
+            this.originalPriceLabel.Text = "Tukkuhinta:";
             // 
-            // button6
+            // nameLabel
             // 
-            this.button6.Location = new System.Drawing.Point(214, 145);
-            this.button6.Margin = new System.Windows.Forms.Padding(2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(129, 41);
-            this.button6.TabIndex = 8;
-            this.button6.Text = "Lisää / Muokkaa";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(501, 87);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(37, 16);
+            this.nameLabel.TabIndex = 4;
+            this.nameLabel.Text = "Nimi:";
             // 
-            // label2
+            // textBoxReccomendedPrice
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(349, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "€";
+            this.textBoxReccomendedPrice.Location = new System.Drawing.Point(543, 138);
+            this.textBoxReccomendedPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxReccomendedPrice.Name = "textBoxReccomendedPrice";
+            this.textBoxReccomendedPrice.Size = new System.Drawing.Size(172, 22);
+            this.textBoxReccomendedPrice.TabIndex = 3;
             // 
-            // label5
+            // textBoxOriginalPrice
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(349, 115);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(13, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "€";
+            this.textBoxOriginalPrice.Location = new System.Drawing.Point(543, 110);
+            this.textBoxOriginalPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxOriginalPrice.Name = "textBoxOriginalPrice";
+            this.textBoxOriginalPrice.Size = new System.Drawing.Size(172, 22);
+            this.textBoxOriginalPrice.TabIndex = 2;
             // 
-            // button7
+            // textBoxName
             // 
-            this.button7.Location = new System.Drawing.Point(214, 191);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(128, 39);
-            this.button7.TabIndex = 11;
-            this.button7.Text = "Takaisin";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.textBoxName.Location = new System.Drawing.Point(543, 81);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(172, 22);
+            this.textBoxName.TabIndex = 0;
             // 
-            // tabPage1
+            // tabProductList
             // 
-            this.tabPage1.Controls.Add(this.listView1);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.button5);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(1036, 710);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Tuote Lista";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabProductList.Controls.Add(this.productList);
+            this.tabProductList.Controls.Add(this.refreshButton);
+            this.tabProductList.Controls.Add(this.printButton);
+            this.tabProductList.Controls.Add(this.deleteButton);
+            this.tabProductList.Controls.Add(this.addButton);
+            this.tabProductList.Controls.Add(this.editButton);
+            this.tabProductList.Location = new System.Drawing.Point(4, 25);
+            this.tabProductList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabProductList.Name = "tabProductList";
+            this.tabProductList.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabProductList.Size = new System.Drawing.Size(1732, 1104);
+            this.tabProductList.TabIndex = 0;
+            this.tabProductList.Text = "Tuote Lista";
+            this.tabProductList.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // productList
             // 
-            this.button3.Location = new System.Drawing.Point(575, 640);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(186, 65);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Muokkaa Tuote";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.productList.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.productList.HideSelection = false;
+            this.productList.Location = new System.Drawing.Point(5, 6);
+            this.productList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.productList.Name = "productList";
+            this.productList.Size = new System.Drawing.Size(1369, 776);
+            this.productList.TabIndex = 7;
+            this.productList.UseCompatibleStateImageBehavior = false;
+            this.productList.SelectedIndexChanged += new System.EventHandler(this.productList_SelectedIndexChanged);
             // 
-            // button4
+            // refreshButton
             // 
-            this.button4.Location = new System.Drawing.Point(331, 640);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(240, 65);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Lisää Uusi Tuote";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.refreshButton.Location = new System.Drawing.Point(1256, 788);
+            this.refreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(118, 80);
+            this.refreshButton.TabIndex = 1;
+            this.refreshButton.Text = "Päivitä Lista";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refeshButton_Click);
             // 
-            // button2
+            // printButton
             // 
-            this.button2.Location = new System.Drawing.Point(765, 640);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(173, 65);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Poista Tuote";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.printButton.Location = new System.Drawing.Point(5, 788);
+            this.printButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.printButton.Name = "printButton";
+            this.printButton.Size = new System.Drawing.Size(431, 80);
+            this.printButton.TabIndex = 8;
+            this.printButton.Text = "Tulosta";
+            this.printButton.UseVisualStyleBackColor = true;
+            this.printButton.Click += new System.EventHandler(this.printButton_Click);
             // 
-            // button5
+            // deleteButton
             // 
-            this.button5.Location = new System.Drawing.Point(6, 640);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(321, 65);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Tulosta";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.deleteButton.Location = new System.Drawing.Point(1020, 788);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(231, 80);
+            this.deleteButton.TabIndex = 3;
+            this.deleteButton.Text = "Poista Tuote";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
-            // button1
+            // addButton
             // 
-            this.button1.Location = new System.Drawing.Point(942, 640);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 65);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Päivitä Lista";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.addButton.Location = new System.Drawing.Point(441, 788);
+            this.addButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(320, 80);
+            this.addButton.TabIndex = 6;
+            this.addButton.Text = "Lisää Uusi Tuote";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // listView1
+            // editButton
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(4, 5);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1028, 631);
-            this.listView1.TabIndex = 7;
-            this.listView1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.editButton.Location = new System.Drawing.Point(767, 788);
+            this.editButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(248, 80);
+            this.editButton.TabIndex = 4;
+            this.editButton.Text = "Muokkaa Tuote";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
-            // tabControl1
+            // tabMain
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(9, 10);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1044, 736);
-            this.tabControl1.TabIndex = 9;
+            this.tabMain.Controls.Add(this.tabProductList);
+            this.tabMain.Controls.Add(this.tabEditProduct);
+            this.tabMain.Controls.Add(this.tabPDF);
+            this.tabMain.Location = new System.Drawing.Point(15, 15);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabMain.Name = "tabMain";
+            this.tabMain.SelectedIndex = 0;
+            this.tabMain.Size = new System.Drawing.Size(1740, 1133);
+            this.tabMain.TabIndex = 9;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 761);
-            this.Controls.Add(this.Nettisivu);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(1419, 937);
+            this.Controls.Add(this.websiteLinkLabel);
+            this.Controls.Add(this.tabMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Piian Herkut - Lähetyslista";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPreview)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.tabPDF.ResumeLayout(false);
+            this.tabPDF.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewGrid)).EndInit();
+            this.tabEditProduct.ResumeLayout(false);
+            this.tabEditProduct.PerformLayout();
+            this.tabProductList.ResumeLayout(false);
+            this.tabMain.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.LinkLabel Nettisivu;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView dgvPreview;
-        private System.Windows.Forms.TextBox txtReceiver;
-        private System.Windows.Forms.TextBox txtDate;
-        private System.Windows.Forms.Label lblReceiver;
-        private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.Button btnGeneratePdf;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.LinkLabel websiteLinkLabel;
+        private System.Windows.Forms.TabPage tabPDF;
+        private System.Windows.Forms.DataGridView previewGrid;
+        private System.Windows.Forms.TextBox textBoxReceiver;
+        private System.Windows.Forms.TextBox textBoxDate;
+        private System.Windows.Forms.Label recieverLabel;
+        private System.Windows.Forms.Label dateLabel;
+        private System.Windows.Forms.Button generatePDFButton;
+        private System.Windows.Forms.Button backPDFButton;
+        private System.Windows.Forms.TabPage tabEditProduct;
+        private System.Windows.Forms.Button backEditButton;
+        private System.Windows.Forms.Label euroLabelReccomended;
+        private System.Windows.Forms.Label euroLabelOriginal;
+        private System.Windows.Forms.Button editAddButton;
+        private System.Windows.Forms.Label reccomendedPriceLabel;
+        private System.Windows.Forms.Label originalPriceLabel;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox textBoxReccomendedPrice;
+        private System.Windows.Forms.TextBox textBoxOriginalPrice;
+        private System.Windows.Forms.TabPage tabProductList;
+        private System.Windows.Forms.ListView productList;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button printButton;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.TabControl tabMain;
+        private TextBox textBoxName;
     }
 }
 

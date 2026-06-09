@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using iText.IO.Font.Constants;
+﻿using iText.IO.Font.Constants;
 using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
@@ -22,15 +21,11 @@ namespace pien_herkun_softa
 {
     public partial class Form1 : Form
     {
-        // JSON storage
-        private readonly string jsonPath = "data.json";
+        // JSON
+        private readonly string jsonDataPath = "data.json";
         private List<Product> localProducts = new List<Product>();
         private Product editingProduct = null;
         private List<PrintItem> previewItems = new List<PrintItem>();
-
-
-        Timer updateTimer = new Timer();
-
 
         public Form1()
         {
@@ -40,36 +35,41 @@ namespace pien_herkun_softa
             LoadLocalProducts();
 
             this.Shown += async (s, e) => await UpdateListViewAsync();
-
         }
 
         private void LoadPreview(List<PrintItem> items)
         {
             previewItems = items;
 
-            dgvPreview.DataSource = null;
-            dgvPreview.DataSource = previewItems;
+            previewGrid.DataSource = null;
+            previewGrid.DataSource = previewItems;
 
-            txtReceiver.Text = "";
-            txtDate.Text = DateTime.Now.ToString("dd.MM.yyyy");
+            // Finnish column headers
+            previewGrid.Columns["name"].HeaderText = "Tuote";
+            previewGrid.Columns["amount"].HeaderText = "Määrä";
+            previewGrid.Columns["originalPrice"].HeaderText = "Tukkuhinta";
+            previewGrid.Columns["reccomendedPrice"].HeaderText = "Suositushinta";
+
+            textBoxReceiver.Text = "";
+            textBoxDate.Text = DateTime.Now.ToString("dd.MM.yyyy");
         }
 
 
         // ---------------- PRODUCT MODEL ----------------
         public class Product
         {
-            public string Nimi { get; set; }
-            public int Määrä { get; set; }
-            public decimal Tukkuhinta { get; set; }
-            public decimal Suositushinta { get; set; }
+            public string name { get; set; }
+            public int amount { get; set; }
+            public decimal originalPrice { get; set; }
+            public decimal reccomendedPrice { get; set; }
         }
 
         public class PrintItem
         {
-            public string Nimi { get; set; }
-            public int Määrä { get; set; }
-            public decimal Tukkuhinta { get; set; }
-            public decimal Suositushinta { get; set; }
+            public string name { get; set; }
+            public int amount { get; set; }
+            public decimal originalPrice { get; set; }
+            public decimal reccomendedPrice { get; set; }
         }
 
 
@@ -77,9 +77,9 @@ namespace pien_herkun_softa
         // ---------------- JSON LOAD / SAVE ----------------
         private void LoadLocalProducts()
         {
-            if (File.Exists(jsonPath))
+            if (File.Exists(jsonDataPath))
             {
-                string json = File.ReadAllText(jsonPath);
+                string json = File.ReadAllText(jsonDataPath);
                 localProducts = JsonSerializer.Deserialize<List<Product>>(json) ?? new List<Product>();
             }
         }
@@ -87,30 +87,31 @@ namespace pien_herkun_softa
         private void SaveLocalProducts()
         {
             string json = JsonSerializer.Serialize(localProducts, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(jsonPath, json);
+            File.WriteAllText(jsonDataPath, json);
         }
 
         // ---------------- LISTVIEW SETUP ----------------
+        // ListView1 is the list shows the products
         private void SetupListView()
         {
-            listView1.View = View.Details;
-            listView1.FullRowSelect = true;
-            listView1.GridLines = true;
-            listView1.CheckBoxes = true;
-            listView1.MultiSelect = true;
+            productList.View = View.Details;
+            productList.FullRowSelect = true;
+            productList.GridLines = true;
+            productList.CheckBoxes = true;
+            productList.MultiSelect = true;
 
-            listView1.Columns.Clear();
-            listView1.Columns.Add("Tuote", 400);
+            productList.Columns.Clear();
+            productList.Columns.Add("Tuote", 400);
             //listView1.Columns.Add("Hinta (€)", 120);
         }
 
         // ---------------- SCRAPER ----------------
         public async Task<List<Product>> FetchProductsAsync()
         {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
+            var clientTemp = new HttpClient();
+            clientTemp.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
 
-            byte[] bytes = await client.GetByteArrayAsync("https://www.kauppa.piianherkut.fi/shop/");
+            byte[] bytes = await clientTemp.GetByteArrayAsync("https://www.kauppa.piianherkut.fi/shop/");
             string html = Encoding.UTF8.GetString(bytes);
 
             var doc = new HtmlAgilityPack.HtmlDocument();
@@ -124,10 +125,10 @@ namespace pien_herkun_softa
 
             foreach (var p in products)
             {
-                string name = p.SelectSingleNode(".//h2")?.InnerText?.Trim() ?? "N/A";
+                string productName = p.SelectSingleNode(".//h2")?.InnerText?.Trim() ?? "N/A";
                 string priceRaw = p.SelectSingleNode(".//*[contains(@class,'price')]")?.InnerText?.Trim() ?? "0";
 
-                name = System.Net.WebUtility.HtmlDecode(name);
+                productName = System.Net.WebUtility.HtmlDecode(productName);
                 priceRaw = System.Net.WebUtility.HtmlDecode(priceRaw);
 
                 priceRaw = priceRaw
@@ -136,10 +137,10 @@ namespace pien_herkun_softa
                     .Replace(",", ".")
                     .Trim();
 
-                string numericPart = System.Text.RegularExpressions.Regex.Match(priceRaw, @"\d+(\.\d+)?").Value;
+                string numericFilter = System.Text.RegularExpressions.Regex.Match(priceRaw, @"\d+(\.\d+)?").Value;
 
                 decimal.TryParse(
-                    numericPart,
+                    numericFilter,
                     System.Globalization.NumberStyles.Any,
                     System.Globalization.CultureInfo.InvariantCulture,
                     out decimal price
@@ -147,10 +148,10 @@ namespace pien_herkun_softa
 
                 list.Add(new Product
                 {
-                    Nimi = name,
-                    Määrä = 0,
-                    Suositushinta = price,
-                    Tukkuhinta = Math.Round(price / 1.135m, 2)
+                    name = productName,
+                    amount = 0,
+                    reccomendedPrice = price,
+                    originalPrice = Math.Round(price / 1.135m, 2)
                 });
 
             }
@@ -161,68 +162,67 @@ namespace pien_herkun_softa
         // ---------------- UPDATE LISTVIEW ----------------
         private async Task UpdateListViewAsync()
         {
-            listView1.Items.Clear();
+            productList.Items.Clear();
 
             var scraped = await FetchProductsAsync();
 
             // Scraped products
             foreach (var p in scraped)
             {
-                var item = new ListViewItem(p.Nimi + " (Netistä)");
-                item.SubItems.Add(p.Suositushinta.ToString("0.00") + " €");
-                listView1.Items.Add(item);
+                var item = new ListViewItem(p.name + " (Netistä)");
+                item.SubItems.Add(p.reccomendedPrice.ToString("0.00") + " €");
+                productList.Items.Add(item);
             }
 
             // Local products (from JSON)
             foreach (var p in localProducts)
             {
-                var item = new ListViewItem(p.Nimi);
-                item.SubItems.Add(p.Suositushinta.ToString("0.00") + " €");
-                listView1.Items.Add(item);
+                var item = new ListViewItem(p.name);
+                item.SubItems.Add(p.reccomendedPrice.ToString("0.00") + " €");
+                productList.Items.Add(item);
             }
         }
 
         // ---------------- FORM EVENTS ----------------
         private async void Form1_Load(object sender, EventArgs e)
         {
-            await FetchProductsAsync(); // not used, but harmless
+            await FetchProductsAsync(); // dont delete!!
         }
 
-        // button1 = Päivitä Tiedot
-        private async void button1_Click_1(object sender, EventArgs e)
+        // button1 = update list
+        private async void refeshButton_Click(object sender, EventArgs e)
         {
             await UpdateListViewAsync();
         }
 
-        // button4 = Lisää Uusi Tuote
-        private void button4_Click(object sender, EventArgs e)
+        private void addButton_Click(object sender, EventArgs e)
         {
             editingProduct = null;
 
-            textBox1.Text = ""; // Nimi
-            textBox3.Text = ""; // Tukkuhinta
-            textBox4.Text = ""; // Suositushinta
+            textBoxName.Text = ""; // name
+            textBoxOriginalPrice.Text = ""; // originalPrice
+            textBoxReccomendedPrice.Text = ""; // reccomendedPrice
 
-            tabControl1.SelectedTab = tabPage2;
+            tabMain.SelectedTab = tabEditProduct;
         }
 
-        // button3 = Muokkaa Tuote
-        private void button3_Click(object sender, EventArgs e)
+        // button3 = Edit Product
+        private void editButton_Click(object sender, EventArgs e)
         {
-            // Estä usean tuotteen muokkaus
-            if (listView1.SelectedItems.Count == 0)
+            // Block editing multiple products
+            if (productList.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Valitse ensin tuote.");
                 return;
             }
 
-            if (listView1.SelectedItems.Count > 1)
+            if (productList.SelectedItems.Count > 1)
             {
                 MessageBox.Show("Voit muokata vain yhtä tuotetta kerrallaan.");
                 return;
             }
 
-            var selectedItem = listView1.SelectedItems[0];
+            var selectedItem = productList.SelectedItems[0];
             string rawName = selectedItem.Text;
 
             if (rawName.EndsWith(" (Netistä)"))
@@ -231,24 +231,24 @@ namespace pien_herkun_softa
                 return;
             }
 
-            string name = rawName.Replace(" (OMA)", "");
-            editingProduct = localProducts.Find(x => x.Nimi == name);
+            string ownName = rawName.Replace(" (OMA)", "");
+            editingProduct = localProducts.Find(x => x.name == ownName);
             if (editingProduct == null) return;
 
-            textBox1.Text = editingProduct.Nimi;
-            textBox3.Text = editingProduct.Tukkuhinta.ToString("0.00");
-            textBox4.Text = editingProduct.Suositushinta.ToString("0.00");
+            textBoxName.Text = editingProduct.name;
+            textBoxOriginalPrice.Text = editingProduct.originalPrice.ToString("0.00");
+            textBoxReccomendedPrice.Text = editingProduct.reccomendedPrice.ToString("0.00");
 
-            tabControl1.SelectedTab = tabPage2;
+            tabMain.SelectedTab = tabEditProduct;
         }
 
 
-        // button2 = Poista Tuote
-        private async void button2_Click(object sender, EventArgs e)
+        // button2 = Delete product
+        private async void deleteButton_Click(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count == 0) return;
+            if (productList.SelectedItems.Count == 0) return;
 
-            var selectedItem = listView1.SelectedItems[0];
+            var selectedItem = productList.SelectedItems[0];
             string rawName = selectedItem.Text;
 
             if (rawName.EndsWith(" (Netistä)"))
@@ -257,8 +257,8 @@ namespace pien_herkun_softa
                 return;
             }
 
-            string name = rawName.Replace(" (Netistä)", "");
-            var tuote = localProducts.Find(x => x.Nimi == name);
+            string nameCheck = rawName.Replace(" (Netistä)", "");
+            var tuote = localProducts.Find(x => x.name == nameCheck);
             if (tuote == null) return;
 
             localProducts.Remove(tuote);
@@ -266,80 +266,80 @@ namespace pien_herkun_softa
             await UpdateListViewAsync();
         }
 
-        // button6 = Tallenna (SAVE)
-        private async void button6_Click(object sender, EventArgs e)
+        private async void editAddButton_Click(object sender, EventArgs e)
         {
-            string nimi = textBox1.Text.Trim();
-            decimal.TryParse(textBox3.Text.Trim().Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal tukku);
-            decimal.TryParse(textBox4.Text.Trim().Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal suositus);
+            string localName = textBoxName.Text.Trim();
+            decimal.TryParse(textBoxOriginalPrice.Text.Trim().Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal tukku);
+            decimal.TryParse(textBoxReccomendedPrice.Text.Trim().Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal suositus);
 
-            if (string.IsNullOrWhiteSpace(nimi))
+            if (string.IsNullOrWhiteSpace(localName))
             {
-                MessageBox.Show("Nimi ei voi olla tyhjä.");
+                MessageBox.Show("Name ei voi olla tyhjä.");
                 return;
             }
 
             if (editingProduct == null)
             {
                 // New product
-                var uusi = new Product
+                var newTemp = new Product
                 {
-                    Nimi = nimi,
-                    Suositushinta = suositus,
-                    Tukkuhinta = Math.Round(suositus / 1.135m, 2)
+                    name = localName,
+                    reccomendedPrice = suositus,
+                    originalPrice = Math.Round(suositus / 1.135m, 2)
                 };
-                localProducts.Add(uusi);
+                localProducts.Add(newTemp);
             }
             else
             {
                 // Edit existing
-                editingProduct.Nimi = nimi;
-                editingProduct.Suositushinta = suositus;
-                editingProduct.Tukkuhinta = Math.Round(suositus / 1.135m, 2);
-                editingProduct.Suositushinta = suositus;
+                editingProduct.name = localName;
+                editingProduct.reccomendedPrice = suositus;
+                editingProduct.originalPrice = Math.Round(suositus / 1.135m, 2);
+                editingProduct.reccomendedPrice = suositus;
             }
 
             SaveLocalProducts();
             MessageBox.Show("Tuote tallennettu.");
 
             editingProduct = null;
-            tabControl1.SelectedTab = tabPage1;
+            tabMain.SelectedTab = tabProductList;
             await UpdateListViewAsync();
         }
 
 
 
         // ---------------- MISC EVENTS ----------------
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void productList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (ListViewItem item in listView1.SelectedItems)
+            foreach (ListViewItem item in productList.SelectedItems)
                 item.Checked = true;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e) { }
-        private void textBox1_TextChanged_1(object sender, EventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void button5_Click(object sender, EventArgs e)
+
+
+
+        // Print page
+        private void printButton_Click(object sender, EventArgs e)
         {
             var selected = new List<PrintItem>();
 
-            foreach (ListViewItem item in listView1.Items)
+            foreach (ListViewItem item in productList.Items)
             {
                 if (!item.Checked) continue;
 
-                string name = item.Text.Replace(" (Netistä)", "");
-                Product p = localProducts.Find(x => x.Nimi == name);
+                string nameNet = item.Text.Replace(" (Netistä)", "");
+                Product p = localProducts.Find(x => x.name == nameNet);
 
                 if (p == null)
                 {
-                    decimal suositus = decimal.Parse(item.SubItems[1].Text.Replace("€", "").Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+                    decimal reccomendedPriceCalc = decimal.Parse(item.SubItems[1].Text.Replace("€", "").Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
 
                     selected.Add(new PrintItem
                     {
-                        Nimi = name,
-                        Määrä = 1,
-                        Suositushinta = suositus,
-                        Tukkuhinta = Math.Round(suositus / 1.135m, 2)
+                        name = nameNet,
+                        amount = 1,
+                        reccomendedPrice = reccomendedPriceCalc,
+                        originalPrice = Math.Round(reccomendedPriceCalc / 1.135m, 2)
                     });
                 }
 
@@ -347,24 +347,24 @@ namespace pien_herkun_softa
                 {
                     selected.Add(new PrintItem
                     {
-                        Nimi = p.Nimi,
-                        Määrä = p.Määrä > 0 ? p.Määrä : 1,
-                        Tukkuhinta = Math.Round(p.Suositushinta / 1.135m, 2),
-                        Suositushinta = p.Suositushinta
+                        name = p.name,
+                        amount = p.amount > 0 ? p.amount : 1,
+                        originalPrice = Math.Round(p.reccomendedPrice / 1.135m, 2),
+                        reccomendedPrice = p.reccomendedPrice
                     });
                 }
             }
 
             LoadPreview(selected);
-            tabControl1.SelectedTab = tabPage3;
+            tabMain.SelectedTab = tabPDF;
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
+        private void backPDFButton_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage1;
+            tabMain.SelectedTab = tabProductList;
         }
 
-        private void btnGeneratePdf_Click(object sender, EventArgs e)
+        private void generatePDFButton_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
@@ -406,13 +406,13 @@ namespace pien_herkun_softa
             Table header = new Table(2).UseAllAvailableWidth();
 
             header.AddCell(new Cell()
-                .Add(new Paragraph("Vastaanottaja:\n" + txtReceiver.Text))
+                .Add(new Paragraph("Vastaanottaja:\n" + textBoxReceiver.Text))
                 .SetBorder(Border.NO_BORDER)
                 .SetFont(normal)
                 .SetFontSize(12));
 
             header.AddCell(new Cell()
-                .Add(new Paragraph("Lähetyspäivä: " + txtDate.Text))
+                .Add(new Paragraph("Lähetyspäivä: " + textBoxDate.Text))
                 .SetTextAlignment(TextAlignment.RIGHT)
                 .SetBorder(Border.NO_BORDER)
                 .SetFont(normal)
@@ -441,16 +441,16 @@ namespace pien_herkun_softa
             // ROWS
             foreach (var item in previewItems)
             {
-                table.AddCell(new Cell().Add(new Paragraph(item.Nimi)));
+                table.AddCell(new Cell().Add(new Paragraph(item.name)));
 
-                table.AddCell(new Cell().Add(new Paragraph(item.Määrä.ToString())));
+                table.AddCell(new Cell().Add(new Paragraph(item.amount.ToString())));
 
-                decimal tukku = Math.Round(item.Suositushinta / 1.135m, 2);
-                string tukkuStr = tukku.ToString("0.00").Replace(".", ",");
+                decimal tukkuTemp = Math.Round(item.reccomendedPrice / 1.135m, 2);
+                string tukkuStr = tukkuTemp.ToString("0.00").Replace(".", ",");
 
                 table.AddCell(new Cell().Add(new Paragraph(tukkuStr)));
 
-                string suositusStr = item.Suositushinta.ToString("0.00").Replace(".", ",");
+                string suositusStr = item.reccomendedPrice.ToString("0.00").Replace(".", ",");
                 table.AddCell(new Cell().Add(new Paragraph(suositusStr)));
             }
 
@@ -458,7 +458,7 @@ namespace pien_herkun_softa
 
             doc.Close();
 
-            MessageBox.Show("PDF luotu onnistuneesti");
+            MessageBox.Show("PDF luotu onnistuneesti!");
         }
 
 
@@ -467,14 +467,9 @@ namespace pien_herkun_softa
             System.Diagnostics.Process.Start("https://www.kauppa.piianherkut.fi/shop/");
         }
 
-        private void txtDate_TextChanged(object sender, EventArgs e)
+        private void backEditButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage1;
+            tabMain.SelectedTab = tabProductList;
         }
     }
 }
