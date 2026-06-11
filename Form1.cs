@@ -21,7 +21,7 @@ namespace pien_herkun_softa
 {
     public partial class Form1 : Form
     {
-        // JSON
+        // JSON and table init
         private readonly string jsonDataPath = "data.json";
         private List<Product> localProducts = new List<Product>();
         private Product editingProduct = null;
@@ -44,7 +44,6 @@ namespace pien_herkun_softa
             previewGrid.DataSource = null;
             previewGrid.DataSource = previewItems;
 
-            // Finnish column headers
             previewGrid.Columns["name"].HeaderText = "Tuote";
             previewGrid.Columns["amount"].HeaderText = "Määrä";
             previewGrid.Columns["originalPrice"].HeaderText = "Tukkuhinta";
@@ -55,7 +54,6 @@ namespace pien_herkun_softa
         }
 
 
-        // ---------------- PRODUCT MODEL ----------------
         public class Product
         {
             public string name { get; set; }
@@ -74,7 +72,7 @@ namespace pien_herkun_softa
 
 
 
-        // ---------------- JSON LOAD / SAVE ----------------
+        // JSON loading and saving
         private void LoadLocalProducts()
         {
             if (File.Exists(jsonDataPath))
@@ -90,8 +88,7 @@ namespace pien_herkun_softa
             File.WriteAllText(jsonDataPath, json);
         }
 
-        // ---------------- LISTVIEW SETUP ----------------
-        // ListView1 is the list shows the products
+        // porductlist init
         private void SetupListView()
         {
             productList.View = View.Details;
@@ -102,10 +99,10 @@ namespace pien_herkun_softa
 
             productList.Columns.Clear();
             productList.Columns.Add("Tuote", 400);
-            //listView1.Columns.Add("Hinta (€)", 120);
+            //listView1.Columns.Add("Hinta (€)", 120);  // not needed now
         }
 
-        // ---------------- SCRAPER ----------------
+        // web scraper. searches the web using a temporary mozilla user
         public async Task<List<Product>> FetchProductsAsync()
         {
             var clientTemp = new HttpClient();
@@ -114,6 +111,7 @@ namespace pien_herkun_softa
             byte[] bytes = await clientTemp.GetByteArrayAsync("https://www.kauppa.piianherkut.fi/shop/");
             string html = Encoding.UTF8.GetString(bytes);
 
+            // downloads a temporary html of the website
             var doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(html);
 
@@ -123,6 +121,7 @@ namespace pien_herkun_softa
             if (products == null)
                 return list;
 
+            // searches for the price and names of the products
             foreach (var p in products)
             {
                 string productName = p.SelectSingleNode(".//h2")?.InnerText?.Trim() ?? "N/A";
@@ -137,6 +136,7 @@ namespace pien_herkun_softa
                     .Replace(",", ".")
                     .Trim();
 
+                // filter
                 string numericFilter = System.Text.RegularExpressions.Regex.Match(priceRaw, @"\d+(\.\d+)?").Value;
 
                 decimal.TryParse(
@@ -159,14 +159,14 @@ namespace pien_herkun_softa
             return list;
         }
 
-        // ---------------- UPDATE LISTVIEW ----------------
+        // productlsit update with the new products that were searched from the net
         private async Task UpdateListViewAsync()
         {
             productList.Items.Clear();
 
             var scraped = await FetchProductsAsync();
 
-            // Scraped products
+            // net products (NET)
             foreach (var p in scraped)
             {
                 var item = new ListViewItem(p.name + " (Netistä)");
@@ -174,7 +174,7 @@ namespace pien_herkun_softa
                 productList.Items.Add(item);
             }
 
-            // Local products (from JSON)
+            // local products (JSON)
             foreach (var p in localProducts)
             {
                 var item = new ListViewItem(p.name);
@@ -183,17 +183,18 @@ namespace pien_herkun_softa
             }
         }
 
-        // ---------------- FORM EVENTS ----------------
+        // initialization
         private async void Form1_Load(object sender, EventArgs e)
         {
             await FetchProductsAsync(); // dont delete!!
         }
 
-        // button1 = update list
+
         private async void refeshButton_Click(object sender, EventArgs e)
         {
             await UpdateListViewAsync();
         }
+
 
         private void addButton_Click(object sender, EventArgs e)
         {
@@ -206,22 +207,23 @@ namespace pien_herkun_softa
             tabMain.SelectedTab = tabEditProduct;
         }
 
-        // button3 = Edit Product
         private void editButton_Click(object sender, EventArgs e)
         {
-            // Block editing multiple products
+            // block editing multiple products
             if (productList.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Valitse ensin tuote.");
                 return;
             }
 
+            // isnt that reliable. it still can edit only one product at a time, but it still looks like you can edit multiple at a time
             if (productList.SelectedItems.Count > 1)
             {
                 MessageBox.Show("Voit muokata vain yhtä tuotetta kerrallaan.");
                 return;
             }
 
+            // cant edit a product coming from the net
             var selectedItem = productList.SelectedItems[0];
             string rawName = selectedItem.Text;
 
@@ -243,7 +245,6 @@ namespace pien_herkun_softa
         }
 
 
-        // button2 = Delete product
         private async void deleteButton_Click(object sender, EventArgs e)
         {
             if (productList.SelectedItems.Count == 0) return;
@@ -251,6 +252,7 @@ namespace pien_herkun_softa
             var selectedItem = productList.SelectedItems[0];
             string rawName = selectedItem.Text;
 
+            // cannot delete net product
             if (rawName.EndsWith(" (Netistä)"))
             {
                 MessageBox.Show("Netistä tulevia tuotteita ei voi poistaa.");
@@ -272,15 +274,16 @@ namespace pien_herkun_softa
             decimal.TryParse(textBoxOriginalPrice.Text.Trim().Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal tukku);
             decimal.TryParse(textBoxReccomendedPrice.Text.Trim().Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal suositus);
 
+            // null name
             if (string.IsNullOrWhiteSpace(localName))
             {
-                MessageBox.Show("Name ei voi olla tyhjä.");
+                MessageBox.Show("Nimi ei voi olla tyhjä.");
                 return;
             }
 
             if (editingProduct == null)
             {
-                // New product
+                // new product
                 var newTemp = new Product
                 {
                     name = localName,
@@ -291,7 +294,7 @@ namespace pien_herkun_softa
             }
             else
             {
-                // Edit existing
+                // edit existing product
                 editingProduct.name = localName;
                 editingProduct.reccomendedPrice = suositus;
                 editingProduct.originalPrice = Math.Round(suositus / 1.135m, 2);
@@ -308,7 +311,7 @@ namespace pien_herkun_softa
 
 
 
-        // ---------------- MISC EVENTS ----------------
+        // i have no idea what this does, but my debugger (ai) tells me that im missing this
         private void productList_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (ListViewItem item in productList.SelectedItems)
@@ -318,7 +321,7 @@ namespace pien_herkun_softa
 
 
 
-        // Print page
+        // print page
         private void printButton_Click(object sender, EventArgs e)
         {
             var selected = new List<PrintItem>();
@@ -327,6 +330,7 @@ namespace pien_herkun_softa
             {
                 if (!item.Checked) continue;
 
+                // check if the name contains the net name in the end and remove it
                 string nameNet = item.Text.Replace(" (Netistä)", "");
                 Product p = localProducts.Find(x => x.name == nameNet);
 
@@ -339,7 +343,7 @@ namespace pien_herkun_softa
                         name = nameNet,
                         amount = 1,
                         reccomendedPrice = reccomendedPriceCalc,
-                        originalPrice = Math.Round(reccomendedPriceCalc / 1.135m, 2)
+                        originalPrice = Math.Round(reccomendedPriceCalc / 1.135m, 2) //reccomendedprice calc
                     });
                 }
 
@@ -375,7 +379,7 @@ namespace pien_herkun_softa
                     return;
 
                 CreatePdf(sfd.FileName);
-            }
+            }we
         }
 
         private void CreatePdf(string path)
@@ -387,13 +391,13 @@ namespace pien_herkun_softa
             PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
             PdfFont normal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-            // LOGO
+            // logo is located in the debugger
             Image logo = new Image(ImageDataFactory.Create("logo.png"))
                 .ScaleToFit(60, 60)
                 .SetMarginBottom(-30);
             doc.Add(logo);
 
-            // TITLE
+            // title
             var title = new Paragraph("LÄHETYSLISTA")
                 .SetFont(bold)
                 .SetFontSize(12)
@@ -402,7 +406,7 @@ namespace pien_herkun_softa
                 .SetMarginBottom(20);
             doc.Add(title);
 
-            // HEADER BLOCK (Receiver left, Date right)
+            // reciever
             Table header = new Table(2).UseAllAvailableWidth();
 
             header.AddCell(new Cell()
@@ -411,6 +415,7 @@ namespace pien_herkun_softa
                 .SetFont(normal)
                 .SetFontSize(12));
 
+            // date
             header.AddCell(new Cell()
                 .Add(new Paragraph("Lähetyspäivä: " + textBoxDate.Text))
                 .SetTextAlignment(TextAlignment.RIGHT)
@@ -421,24 +426,24 @@ namespace pien_herkun_softa
 
             doc.Add(header);
 
-            // FOOTER NOTE
+            // extra info about the reccomended price
             doc.Add(new Paragraph("\nTukkuhinta alv 0%, suositushinta sisältää arvonlisäveron 13,5%.")
                 .SetFontSize(10)
                 .SetFont(bold));
 
             doc.Add(new Paragraph("\n"));
 
-            // PRODUCT TABLE (same layout as real company)
+            // table init
             Table table = new Table(new float[] { 4, 1, 2, 2 })
                 .UseAllAvailableWidth();
 
-            // HEADER ROW
+            // table rows
             table.AddHeaderCell(new Cell().Add(new Paragraph("Tuote").SetFont(bold).SetFontSize(12).SetFontColor(ColorConstants.BLACK)).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
             table.AddHeaderCell(new Cell().Add(new Paragraph("Määrä").SetFont(bold).SetFontSize(12).SetFontColor(ColorConstants.BLACK)).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
             table.AddHeaderCell(new Cell().Add(new Paragraph("Tukkuhinta").SetFont(bold).SetFontSize(12).SetFontColor(ColorConstants.BLACK)).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
             table.AddHeaderCell(new Cell().Add(new Paragraph("Suositushinta").SetFont(bold).SetFontSize(12).SetFontColor(ColorConstants.BLACK)).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
 
-            // ROWS
+            // rows contents
             foreach (var item in previewItems)
             {
                 table.AddCell(new Cell().Add(new Paragraph(item.name)));
@@ -461,7 +466,7 @@ namespace pien_herkun_softa
             MessageBox.Show("PDF luotu onnistuneesti!");
         }
 
-
+        // button link that goes to the website where it scrapes the net products
         private void Nettisivu_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.kauppa.piianherkut.fi/shop/");
