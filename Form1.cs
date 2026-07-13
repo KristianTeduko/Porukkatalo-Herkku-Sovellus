@@ -27,6 +27,9 @@ namespace pien_herkun_softa
         private Product editingProduct = null;
         private List<PrintItem> previewItems = new List<PrintItem>();
 
+        public bool showNetProducts = true; // default value
+
+        // constructor
         public Form1()
         {
             InitializeComponent();
@@ -99,7 +102,7 @@ namespace pien_herkun_softa
 
             productList.Columns.Clear();
             productList.Columns.Add("Tuote", 400);
-            //listView1.Columns.Add("Hinta (€)", 120);  // not needed now
+            //listView1.Columns.Add("Hinta (€)", 120);  // only needed for when debugging
         }
 
         // web scraper. searches the web using a temporary mozilla user
@@ -164,14 +167,17 @@ namespace pien_herkun_softa
         {
             productList.Items.Clear();
 
-            var scraped = await FetchProductsAsync();
-
-            // net products (NET)
-            foreach (var p in scraped)
+            if (showNetProducts == true)
             {
-                var item = new ListViewItem(p.name + " (Netistä)");
-                item.SubItems.Add(p.reccomendedPrice.ToString("0.00") + " €");
-                productList.Items.Add(item);
+                var scraped = await FetchProductsAsync();
+
+                // net products (NET)
+                foreach (var p in scraped)
+                {
+                    var item = new ListViewItem(p.name + " (Netistä)");
+                    item.SubItems.Add(p.reccomendedPrice.ToString("0.00") + " €");
+                    productList.Items.Add(item);
+                }
             }
 
             // local products (JSON)
@@ -343,7 +349,7 @@ namespace pien_herkun_softa
                         name = nameNet,
                         amount = 1,
                         reccomendedPrice = reccomendedPriceCalc,
-                        originalPrice = Math.Round(reccomendedPriceCalc / 1.135m, 2) //reccomendedprice calc
+                        originalPrice = Math.Round(reccomendedPriceCalc / 1.135m, 2) //calculate reccomended price
                     });
                 }
 
@@ -373,7 +379,7 @@ namespace pien_herkun_softa
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
                 sfd.Filter = "PDF Files (*.pdf)|*.pdf";
-                sfd.FileName = "lähetyslista.pdf";
+                sfd.FileName = "lähetyslista.pdf"; // default name
 
                 if (sfd.ShowDialog() != DialogResult.OK)
                     return;
@@ -391,7 +397,7 @@ namespace pien_herkun_softa
             PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
             PdfFont normal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-            // logo is located in the debugger
+            // logo is located in the debugger folder
             Image logo = new Image(ImageDataFactory.Create("logo.png"))
                 .ScaleToFit(60, 60)
                 .SetMarginBottom(-30);
@@ -475,6 +481,22 @@ namespace pien_herkun_softa
         private void backEditButton_Click(object sender, EventArgs e)
         {
             tabMain.SelectedTab = tabProductList;
+        }
+
+        private void netButton_changed(object sender, EventArgs e)
+        {
+            if (sender is CheckBox checkBox)
+            {
+                if (checkBox.Checked)
+                {
+                    showNetProducts = true; // show net products
+                }
+                else
+                {
+                    showNetProducts = false;
+                }
+            }
+            _ = UpdateListViewAsync();
         }
     }
 }

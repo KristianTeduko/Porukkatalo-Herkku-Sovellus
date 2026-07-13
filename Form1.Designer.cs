@@ -61,6 +61,7 @@ namespace pien_herkun_softa
             this.addButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.tabMain = new System.Windows.Forms.TabControl();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPDF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewGrid)).BeginInit();
             this.tabEditProduct.SuspendLayout();
@@ -71,9 +72,10 @@ namespace pien_herkun_softa
             // websiteLinkLabel
             // 
             this.websiteLinkLabel.AutoSize = true;
-            this.websiteLinkLabel.Location = new System.Drawing.Point(20, 916);
+            this.websiteLinkLabel.Location = new System.Drawing.Point(174, 619);
+            this.websiteLinkLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.websiteLinkLabel.Name = "websiteLinkLabel";
-            this.websiteLinkLabel.Size = new System.Drawing.Size(90, 16);
+            this.websiteLinkLabel.Size = new System.Drawing.Size(75, 13);
             this.websiteLinkLabel.TabIndex = 10;
             this.websiteLinkLabel.TabStop = true;
             this.websiteLinkLabel.Text = "Netin Tuotteet";
@@ -88,11 +90,11 @@ namespace pien_herkun_softa
             this.tabPDF.Controls.Add(this.dateLabel);
             this.tabPDF.Controls.Add(this.generatePDFButton);
             this.tabPDF.Controls.Add(this.backPDFButton);
-            this.tabPDF.Location = new System.Drawing.Point(4, 25);
-            this.tabPDF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPDF.Location = new System.Drawing.Point(4, 22);
+            this.tabPDF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPDF.Name = "tabPDF";
-            this.tabPDF.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPDF.Size = new System.Drawing.Size(1732, 1104);
+            this.tabPDF.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPDF.Size = new System.Drawing.Size(1297, 895);
             this.tabPDF.TabIndex = 2;
             this.tabPDF.Text = "Tulostus";
             this.tabPDF.UseVisualStyleBackColor = true;
@@ -105,56 +107,50 @@ namespace pien_herkun_softa
             this.previewGrid.ColumnHeadersHeight = 32;
             this.previewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.previewGrid.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.previewGrid.Location = new System.Drawing.Point(7, 148);
-            this.previewGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.previewGrid.Location = new System.Drawing.Point(5, 120);
             this.previewGrid.Name = "previewGrid";
             this.previewGrid.RowHeadersWidth = 51;
             this.previewGrid.RowTemplate.Height = 32;
-            this.previewGrid.Size = new System.Drawing.Size(1368, 720);
+            this.previewGrid.Size = new System.Drawing.Size(1026, 585);
             this.previewGrid.TabIndex = 0;
             // 
             // textBoxReceiver
             // 
-            this.textBoxReceiver.Location = new System.Drawing.Point(185, 17);
-            this.textBoxReceiver.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxReceiver.Location = new System.Drawing.Point(139, 14);
             this.textBoxReceiver.Name = "textBoxReceiver";
-            this.textBoxReceiver.Size = new System.Drawing.Size(399, 22);
+            this.textBoxReceiver.Size = new System.Drawing.Size(300, 20);
             this.textBoxReceiver.TabIndex = 1;
             // 
             // textBoxDate
             // 
-            this.textBoxDate.Location = new System.Drawing.Point(185, 60);
-            this.textBoxDate.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxDate.Location = new System.Drawing.Point(139, 49);
             this.textBoxDate.Name = "textBoxDate";
-            this.textBoxDate.Size = new System.Drawing.Size(199, 22);
+            this.textBoxDate.Size = new System.Drawing.Size(150, 20);
             this.textBoxDate.TabIndex = 2;
             // 
             // recieverLabel
             // 
             this.recieverLabel.AutoSize = true;
-            this.recieverLabel.Location = new System.Drawing.Point(15, 23);
-            this.recieverLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.recieverLabel.Location = new System.Drawing.Point(11, 19);
             this.recieverLabel.Name = "recieverLabel";
-            this.recieverLabel.Size = new System.Drawing.Size(93, 16);
+            this.recieverLabel.Size = new System.Drawing.Size(75, 13);
             this.recieverLabel.TabIndex = 3;
             this.recieverLabel.Text = "Vastaanottaja:";
             // 
             // dateLabel
             // 
             this.dateLabel.AutoSize = true;
-            this.dateLabel.Location = new System.Drawing.Point(15, 66);
-            this.dateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dateLabel.Location = new System.Drawing.Point(11, 54);
             this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(84, 16);
+            this.dateLabel.Size = new System.Drawing.Size(66, 13);
             this.dateLabel.TabIndex = 4;
             this.dateLabel.Text = "Päivämäärä:";
             // 
             // generatePDFButton
             // 
-            this.generatePDFButton.Location = new System.Drawing.Point(1112, 6);
-            this.generatePDFButton.Margin = new System.Windows.Forms.Padding(4);
+            this.generatePDFButton.Location = new System.Drawing.Point(834, 5);
             this.generatePDFButton.Name = "generatePDFButton";
-            this.generatePDFButton.Size = new System.Drawing.Size(263, 79);
+            this.generatePDFButton.Size = new System.Drawing.Size(197, 64);
             this.generatePDFButton.TabIndex = 3;
             this.generatePDFButton.Text = "Luo PDF";
             this.generatePDFButton.UseVisualStyleBackColor = true;
@@ -162,10 +158,9 @@ namespace pien_herkun_softa
             // 
             // backPDFButton
             // 
-            this.backPDFButton.Location = new System.Drawing.Point(1112, 92);
-            this.backPDFButton.Margin = new System.Windows.Forms.Padding(4);
+            this.backPDFButton.Location = new System.Drawing.Point(834, 75);
             this.backPDFButton.Name = "backPDFButton";
-            this.backPDFButton.Size = new System.Drawing.Size(263, 48);
+            this.backPDFButton.Size = new System.Drawing.Size(197, 39);
             this.backPDFButton.TabIndex = 4;
             this.backPDFButton.Text = "Takaisin";
             this.backPDFButton.UseVisualStyleBackColor = true;
@@ -183,21 +178,20 @@ namespace pien_herkun_softa
             this.tabEditProduct.Controls.Add(this.textBoxReccomendedPrice);
             this.tabEditProduct.Controls.Add(this.textBoxOriginalPrice);
             this.tabEditProduct.Controls.Add(this.textBoxName);
-            this.tabEditProduct.Location = new System.Drawing.Point(4, 25);
-            this.tabEditProduct.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabEditProduct.Location = new System.Drawing.Point(4, 22);
+            this.tabEditProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabEditProduct.Name = "tabEditProduct";
-            this.tabEditProduct.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabEditProduct.Size = new System.Drawing.Size(1732, 1104);
+            this.tabEditProduct.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabEditProduct.Size = new System.Drawing.Size(1297, 895);
             this.tabEditProduct.TabIndex = 1;
             this.tabEditProduct.Text = "Lisää / Muokkaa";
             this.tabEditProduct.UseVisualStyleBackColor = true;
             // 
             // backEditButton
             // 
-            this.backEditButton.Location = new System.Drawing.Point(457, 314);
-            this.backEditButton.Margin = new System.Windows.Forms.Padding(4);
+            this.backEditButton.Location = new System.Drawing.Point(343, 255);
             this.backEditButton.Name = "backEditButton";
-            this.backEditButton.Size = new System.Drawing.Size(312, 78);
+            this.backEditButton.Size = new System.Drawing.Size(234, 63);
             this.backEditButton.TabIndex = 11;
             this.backEditButton.Text = "Takaisin";
             this.backEditButton.UseVisualStyleBackColor = true;
@@ -206,29 +200,27 @@ namespace pien_herkun_softa
             // euroLabelReccomended
             // 
             this.euroLabelReccomended.AutoSize = true;
-            this.euroLabelReccomended.Location = new System.Drawing.Point(723, 145);
-            this.euroLabelReccomended.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.euroLabelReccomended.Location = new System.Drawing.Point(542, 118);
             this.euroLabelReccomended.Name = "euroLabelReccomended";
-            this.euroLabelReccomended.Size = new System.Drawing.Size(14, 16);
+            this.euroLabelReccomended.Size = new System.Drawing.Size(13, 13);
             this.euroLabelReccomended.TabIndex = 10;
             this.euroLabelReccomended.Text = "€";
             // 
             // euroLabelOriginal
             // 
             this.euroLabelOriginal.AutoSize = true;
-            this.euroLabelOriginal.Location = new System.Drawing.Point(723, 116);
-            this.euroLabelOriginal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.euroLabelOriginal.Location = new System.Drawing.Point(542, 94);
             this.euroLabelOriginal.Name = "euroLabelOriginal";
-            this.euroLabelOriginal.Size = new System.Drawing.Size(14, 16);
+            this.euroLabelOriginal.Size = new System.Drawing.Size(13, 13);
             this.euroLabelOriginal.TabIndex = 9;
             this.euroLabelOriginal.Text = "€";
             // 
             // editAddButton
             // 
-            this.editAddButton.Location = new System.Drawing.Point(457, 197);
-            this.editAddButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.editAddButton.Location = new System.Drawing.Point(343, 160);
+            this.editAddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.editAddButton.Name = "editAddButton";
-            this.editAddButton.Size = new System.Drawing.Size(312, 111);
+            this.editAddButton.Size = new System.Drawing.Size(234, 90);
             this.editAddButton.TabIndex = 8;
             this.editAddButton.Text = "Lisää / Muokkaa";
             this.editAddButton.UseVisualStyleBackColor = true;
@@ -237,67 +229,72 @@ namespace pien_herkun_softa
             // reccomendedPriceLabel
             // 
             this.reccomendedPriceLabel.AutoSize = true;
-            this.reccomendedPriceLabel.Location = new System.Drawing.Point(447, 145);
+            this.reccomendedPriceLabel.Location = new System.Drawing.Point(335, 118);
+            this.reccomendedPriceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.reccomendedPriceLabel.Name = "reccomendedPriceLabel";
-            this.reccomendedPriceLabel.Size = new System.Drawing.Size(89, 16);
+            this.reccomendedPriceLabel.Size = new System.Drawing.Size(73, 13);
             this.reccomendedPriceLabel.TabIndex = 7;
             this.reccomendedPriceLabel.Text = "Suositushinta:";
             // 
             // originalPriceLabel
             // 
             this.originalPriceLabel.AutoSize = true;
-            this.originalPriceLabel.Location = new System.Drawing.Point(462, 116);
+            this.originalPriceLabel.Location = new System.Drawing.Point(346, 94);
+            this.originalPriceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.originalPriceLabel.Name = "originalPriceLabel";
-            this.originalPriceLabel.Size = new System.Drawing.Size(75, 16);
+            this.originalPriceLabel.Size = new System.Drawing.Size(64, 13);
             this.originalPriceLabel.TabIndex = 6;
             this.originalPriceLabel.Text = "Tukkuhinta:";
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(501, 87);
+            this.nameLabel.Location = new System.Drawing.Point(376, 71);
+            this.nameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(37, 16);
+            this.nameLabel.Size = new System.Drawing.Size(30, 13);
             this.nameLabel.TabIndex = 4;
             this.nameLabel.Text = "Nimi:";
             // 
             // textBoxReccomendedPrice
             // 
-            this.textBoxReccomendedPrice.Location = new System.Drawing.Point(543, 138);
-            this.textBoxReccomendedPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxReccomendedPrice.Location = new System.Drawing.Point(407, 112);
+            this.textBoxReccomendedPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxReccomendedPrice.Name = "textBoxReccomendedPrice";
-            this.textBoxReccomendedPrice.Size = new System.Drawing.Size(172, 22);
+            this.textBoxReccomendedPrice.Size = new System.Drawing.Size(130, 20);
             this.textBoxReccomendedPrice.TabIndex = 3;
             // 
             // textBoxOriginalPrice
             // 
-            this.textBoxOriginalPrice.Location = new System.Drawing.Point(543, 110);
-            this.textBoxOriginalPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxOriginalPrice.Location = new System.Drawing.Point(407, 89);
+            this.textBoxOriginalPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxOriginalPrice.Name = "textBoxOriginalPrice";
-            this.textBoxOriginalPrice.Size = new System.Drawing.Size(172, 22);
+            this.textBoxOriginalPrice.Size = new System.Drawing.Size(130, 20);
             this.textBoxOriginalPrice.TabIndex = 2;
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(543, 81);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxName.Location = new System.Drawing.Point(407, 66);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(172, 22);
+            this.textBoxName.Size = new System.Drawing.Size(130, 20);
             this.textBoxName.TabIndex = 0;
             // 
             // tabProductList
             // 
+            this.tabProductList.Controls.Add(this.websiteLinkLabel);
+            this.tabProductList.Controls.Add(this.checkBox1);
             this.tabProductList.Controls.Add(this.productList);
             this.tabProductList.Controls.Add(this.refreshButton);
             this.tabProductList.Controls.Add(this.printButton);
             this.tabProductList.Controls.Add(this.deleteButton);
             this.tabProductList.Controls.Add(this.addButton);
             this.tabProductList.Controls.Add(this.editButton);
-            this.tabProductList.Location = new System.Drawing.Point(4, 25);
-            this.tabProductList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabProductList.Location = new System.Drawing.Point(4, 22);
+            this.tabProductList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabProductList.Name = "tabProductList";
-            this.tabProductList.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabProductList.Size = new System.Drawing.Size(1732, 1104);
+            this.tabProductList.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabProductList.Size = new System.Drawing.Size(1297, 895);
             this.tabProductList.TabIndex = 0;
             this.tabProductList.Text = "Tuote Lista";
             this.tabProductList.UseVisualStyleBackColor = true;
@@ -306,20 +303,20 @@ namespace pien_herkun_softa
             // 
             this.productList.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.productList.HideSelection = false;
-            this.productList.Location = new System.Drawing.Point(5, 6);
-            this.productList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.productList.Location = new System.Drawing.Point(4, 5);
+            this.productList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.productList.Name = "productList";
-            this.productList.Size = new System.Drawing.Size(1369, 776);
+            this.productList.Size = new System.Drawing.Size(1028, 608);
             this.productList.TabIndex = 7;
             this.productList.UseCompatibleStateImageBehavior = false;
             this.productList.SelectedIndexChanged += new System.EventHandler(this.productList_SelectedIndexChanged);
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(1256, 788);
-            this.refreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.refreshButton.Location = new System.Drawing.Point(942, 640);
+            this.refreshButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(118, 80);
+            this.refreshButton.Size = new System.Drawing.Size(88, 65);
             this.refreshButton.TabIndex = 1;
             this.refreshButton.Text = "Päivitä Lista";
             this.refreshButton.UseVisualStyleBackColor = true;
@@ -327,10 +324,10 @@ namespace pien_herkun_softa
             // 
             // printButton
             // 
-            this.printButton.Location = new System.Drawing.Point(5, 788);
-            this.printButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.printButton.Location = new System.Drawing.Point(4, 640);
+            this.printButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.printButton.Name = "printButton";
-            this.printButton.Size = new System.Drawing.Size(431, 80);
+            this.printButton.Size = new System.Drawing.Size(323, 65);
             this.printButton.TabIndex = 8;
             this.printButton.Text = "Tulosta";
             this.printButton.UseVisualStyleBackColor = true;
@@ -338,10 +335,10 @@ namespace pien_herkun_softa
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(1020, 788);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deleteButton.Location = new System.Drawing.Point(765, 640);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(231, 80);
+            this.deleteButton.Size = new System.Drawing.Size(173, 65);
             this.deleteButton.TabIndex = 3;
             this.deleteButton.Text = "Poista Tuote";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -349,10 +346,10 @@ namespace pien_herkun_softa
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(441, 788);
-            this.addButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addButton.Location = new System.Drawing.Point(331, 640);
+            this.addButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(320, 80);
+            this.addButton.Size = new System.Drawing.Size(240, 65);
             this.addButton.TabIndex = 6;
             this.addButton.Text = "Lisää Uusi Tuote";
             this.addButton.UseVisualStyleBackColor = true;
@@ -360,10 +357,10 @@ namespace pien_herkun_softa
             // 
             // editButton
             // 
-            this.editButton.Location = new System.Drawing.Point(767, 788);
-            this.editButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.editButton.Location = new System.Drawing.Point(575, 640);
+            this.editButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(248, 80);
+            this.editButton.Size = new System.Drawing.Size(186, 65);
             this.editButton.TabIndex = 4;
             this.editButton.Text = "Muokkaa Tuote";
             this.editButton.UseVisualStyleBackColor = true;
@@ -374,23 +371,35 @@ namespace pien_herkun_softa
             this.tabMain.Controls.Add(this.tabProductList);
             this.tabMain.Controls.Add(this.tabEditProduct);
             this.tabMain.Controls.Add(this.tabPDF);
-            this.tabMain.Location = new System.Drawing.Point(15, 15);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabMain.Location = new System.Drawing.Point(11, 12);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1740, 1133);
+            this.tabMain.Size = new System.Drawing.Size(1305, 921);
             this.tabMain.TabIndex = 9;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(5, 618);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(164, 17);
+            this.checkBox1.TabIndex = 9;
+            this.checkBox1.Text = "Näytetäänkö Netin Tuotteet?";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.netButton_changed);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1419, 937);
-            this.Controls.Add(this.websiteLinkLabel);
+            this.ClientSize = new System.Drawing.Size(1064, 761);
             this.Controls.Add(this.tabMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Piian Herkut - Lähetyslista";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -400,9 +409,9 @@ namespace pien_herkun_softa
             this.tabEditProduct.ResumeLayout(false);
             this.tabEditProduct.PerformLayout();
             this.tabProductList.ResumeLayout(false);
+            this.tabProductList.PerformLayout();
             this.tabMain.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -435,6 +444,7 @@ namespace pien_herkun_softa
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.TabControl tabMain;
         private TextBox textBoxName;
+        private CheckBox checkBox1;
     }
 }
 
