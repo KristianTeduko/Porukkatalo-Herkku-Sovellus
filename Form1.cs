@@ -22,7 +22,7 @@ namespace pien_herkun_softa
     public partial class Form1 : Form
     {
         // JSON and table init
-        private readonly string jsonDataPath = "data.json";
+        private readonly string jsonDataPath;
         private List<Product> localProducts = new List<Product>();
         private Product editingProduct = null;
         private List<PrintItem> previewItems = new List<PrintItem>();
@@ -34,6 +34,15 @@ namespace pien_herkun_softa
         {
             InitializeComponent();
             SetupListView();
+
+            // C:\Users\<User>\AppData\Local\Eduko\Porukkatalo\data.json
+            string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Eduko", "Porukkatalo");
+            jsonDataPath = Path.Combine(appDataFolder, "data.json");
+
+            if (!Directory.Exists(appDataFolder))
+            {
+                Directory.CreateDirectory(appDataFolder);
+            }
 
             LoadLocalProducts();
 
@@ -59,18 +68,18 @@ namespace pien_herkun_softa
 
         public class Product
         {
-            public string name { get; set; }
-            public int amount { get; set; }
-            public decimal originalPrice { get; set; }
-            public decimal reccomendedPrice { get; set; }
+            public string Name { get; set; }
+            public int Amount { get; set; }
+            public decimal OriginalPrice { get; set; }
+            public decimal ReccomendedPrice { get; set; }
         }
 
         public class PrintItem
         {
-            public string name { get; set; }
-            public int amount { get; set; }
-            public decimal originalPrice { get; set; }
-            public decimal reccomendedPrice { get; set; }
+            public string Name { get; set; }
+            public int Amount { get; set; }
+            public decimal OriginalPrice { get; set; }
+            public decimal ReccomendedPrice { get; set; }
         }
 
 
@@ -151,10 +160,10 @@ namespace pien_herkun_softa
 
                 list.Add(new Product
                 {
-                    name = productName,
-                    amount = 0,
-                    reccomendedPrice = price,
-                    originalPrice = Math.Round(price / 1.135m, 2)
+                    Name = productName,
+                    Amount = 0,
+                    ReccomendedPrice = price,
+                    OriginalPrice = Math.Round(price / 1.135m, 2)
                 });
 
             }
@@ -174,8 +183,8 @@ namespace pien_herkun_softa
                 // net products (NET)
                 foreach (var p in scraped)
                 {
-                    var item = new ListViewItem(p.name + " (Netistä)");
-                    item.SubItems.Add(p.reccomendedPrice.ToString("0.00") + " €");
+                    var item = new ListViewItem(p.Name + " (Netistä)");
+                    item.SubItems.Add(p.ReccomendedPrice.ToString("0.00") + " €");
                     productList.Items.Add(item);
                 }
             }
@@ -183,8 +192,8 @@ namespace pien_herkun_softa
             // local products (JSON)
             foreach (var p in localProducts)
             {
-                var item = new ListViewItem(p.name);
-                item.SubItems.Add(p.reccomendedPrice.ToString("0.00") + " €");
+                var item = new ListViewItem(p.Name);
+                item.SubItems.Add(p.ReccomendedPrice.ToString("0.00") + " €");
                 productList.Items.Add(item);
             }
         }
@@ -240,12 +249,12 @@ namespace pien_herkun_softa
             }
 
             string ownName = rawName.Replace(" (OMA)", "");
-            editingProduct = localProducts.Find(x => x.name == ownName);
+            editingProduct = localProducts.Find(x => x.Name == ownName);
             if (editingProduct == null) return;
 
-            textBoxName.Text = editingProduct.name;
-            textBoxOriginalPrice.Text = editingProduct.originalPrice.ToString("0.00");
-            textBoxReccomendedPrice.Text = editingProduct.reccomendedPrice.ToString("0.00");
+            textBoxName.Text = editingProduct.Name;
+            textBoxOriginalPrice.Text = editingProduct.OriginalPrice.ToString("0.00");
+            textBoxReccomendedPrice.Text = editingProduct.ReccomendedPrice.ToString("0.00");
 
             tabMain.SelectedTab = tabEditProduct;
         }
@@ -266,7 +275,7 @@ namespace pien_herkun_softa
             }
 
             string nameCheck = rawName.Replace(" (Netistä)", "");
-            var tuote = localProducts.Find(x => x.name == nameCheck);
+            var tuote = localProducts.Find(x => x.Name == nameCheck);
             if (tuote == null) return;
 
             localProducts.Remove(tuote);
@@ -292,19 +301,19 @@ namespace pien_herkun_softa
                 // new product
                 var newTemp = new Product
                 {
-                    name = localName,
-                    reccomendedPrice = suositus,
-                    originalPrice = Math.Round(suositus / 1.135m, 2)
+                    Name = localName,
+                    ReccomendedPrice = suositus,
+                    OriginalPrice = Math.Round(suositus / 1.135m, 2)
                 };
                 localProducts.Add(newTemp);
             }
             else
             {
                 // edit existing product
-                editingProduct.name = localName;
-                editingProduct.reccomendedPrice = suositus;
-                editingProduct.originalPrice = Math.Round(suositus / 1.135m, 2);
-                editingProduct.reccomendedPrice = suositus;
+                editingProduct.Name = localName;
+                editingProduct.ReccomendedPrice = suositus;
+                editingProduct.OriginalPrice = Math.Round(suositus / 1.135m, 2);
+                editingProduct.ReccomendedPrice = suositus;
             }
 
             SaveLocalProducts();
@@ -317,7 +326,7 @@ namespace pien_herkun_softa
 
 
 
-        // i have no idea what this does, but my debugger (ai) tells me that im missing this
+        // i have no idea what this does, but my debugger tells me that im missing this
         private void productList_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (ListViewItem item in productList.SelectedItems)
@@ -338,7 +347,7 @@ namespace pien_herkun_softa
 
                 // check if the name contains the net name in the end and remove it
                 string nameNet = item.Text.Replace(" (Netistä)", "");
-                Product p = localProducts.Find(x => x.name == nameNet);
+                Product p = localProducts.Find(x => x.Name == nameNet);
 
                 if (p == null)
                 {
@@ -346,10 +355,10 @@ namespace pien_herkun_softa
 
                     selected.Add(new PrintItem
                     {
-                        name = nameNet,
-                        amount = 1,
-                        reccomendedPrice = reccomendedPriceCalc,
-                        originalPrice = Math.Round(reccomendedPriceCalc / 1.135m, 2) //calculate reccomended price
+                        Name = nameNet,
+                        Amount = 1,
+                        ReccomendedPrice = reccomendedPriceCalc,
+                        OriginalPrice = Math.Round(reccomendedPriceCalc / 1.135m, 2) //calculate reccomended price
                     });
                 }
 
@@ -357,10 +366,10 @@ namespace pien_herkun_softa
                 {
                     selected.Add(new PrintItem
                     {
-                        name = p.name,
-                        amount = p.amount > 0 ? p.amount : 1,
-                        originalPrice = Math.Round(p.reccomendedPrice / 1.135m, 2),
-                        reccomendedPrice = p.reccomendedPrice
+                        Name = p.Name,
+                        Amount = p.Amount > 0 ? p.Amount : 1,
+                        OriginalPrice = Math.Round(p.ReccomendedPrice / 1.135m, 2),
+                        ReccomendedPrice = p.ReccomendedPrice
                     });
                 }
             }
@@ -452,16 +461,16 @@ namespace pien_herkun_softa
             // rows contents
             foreach (var item in previewItems)
             {
-                table.AddCell(new Cell().Add(new Paragraph(item.name)));
+                table.AddCell(new Cell().Add(new Paragraph(item.Name)));
 
-                table.AddCell(new Cell().Add(new Paragraph(item.amount.ToString())));
+                table.AddCell(new Cell().Add(new Paragraph(item.Amount.ToString())));
 
-                decimal tukkuTemp = Math.Round(item.reccomendedPrice / 1.135m, 2);
+                decimal tukkuTemp = Math.Round(item.ReccomendedPrice / 1.135m, 2);
                 string tukkuStr = tukkuTemp.ToString("0.00").Replace(".", ",");
 
                 table.AddCell(new Cell().Add(new Paragraph(tukkuStr)));
 
-                string suositusStr = item.reccomendedPrice.ToString("0.00").Replace(".", ",");
+                string suositusStr = item.ReccomendedPrice.ToString("0.00").Replace(".", ",");
                 table.AddCell(new Cell().Add(new Paragraph(suositusStr)));
             }
 
