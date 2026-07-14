@@ -324,17 +324,12 @@ namespace pien_herkun_softa
             await UpdateListViewAsync();
         }
 
-
-
         // i have no idea what this does, but my debugger tells me that im missing this
         private void productList_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (ListViewItem item in productList.SelectedItems)
                 item.Checked = true;
         }
-
-
-
 
         // print page
         private void printButton_Click(object sender, EventArgs e)
