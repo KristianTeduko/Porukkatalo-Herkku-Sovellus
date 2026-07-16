@@ -64,6 +64,7 @@ namespace pien_herkun_softa
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.productList = new System.Windows.Forms.ListView();
             this.tabMain = new System.Windows.Forms.TabControl();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabPDF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewGrid)).BeginInit();
             this.tabEditProduct.SuspendLayout();
@@ -77,11 +78,11 @@ namespace pien_herkun_softa
             // 
             this.websiteLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.websiteLinkLabel.AutoSize = true;
-            this.websiteLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.websiteLinkLabel.Location = new System.Drawing.Point(966, 620);
+            this.websiteLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.websiteLinkLabel.Location = new System.Drawing.Point(951, 614);
             this.websiteLinkLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.websiteLinkLabel.Name = "websiteLinkLabel";
-            this.websiteLinkLabel.Size = new System.Drawing.Size(83, 15);
+            this.websiteLinkLabel.Size = new System.Drawing.Size(98, 17);
             this.websiteLinkLabel.TabIndex = 10;
             this.websiteLinkLabel.TabStop = true;
             this.websiteLinkLabel.Text = "Netin Tuotteet";
@@ -89,6 +90,7 @@ namespace pien_herkun_softa
             // 
             // tabPDF
             // 
+            this.tabPDF.Controls.Add(this.label1);
             this.tabPDF.Controls.Add(this.previewGrid);
             this.tabPDF.Controls.Add(this.textBoxReceiver);
             this.tabPDF.Controls.Add(this.textBoxDate);
@@ -96,11 +98,11 @@ namespace pien_herkun_softa
             this.tabPDF.Controls.Add(this.dateLabel);
             this.tabPDF.Controls.Add(this.generatePDFButton);
             this.tabPDF.Controls.Add(this.backPDFButton);
-            this.tabPDF.Location = new System.Drawing.Point(4, 22);
+            this.tabPDF.Location = new System.Drawing.Point(4, 29);
             this.tabPDF.Margin = new System.Windows.Forms.Padding(2);
             this.tabPDF.Name = "tabPDF";
             this.tabPDF.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPDF.Size = new System.Drawing.Size(1056, 735);
+            this.tabPDF.Size = new System.Drawing.Size(1056, 728);
             this.tabPDF.TabIndex = 2;
             this.tabPDF.Text = "Tulostus";
             this.tabPDF.UseVisualStyleBackColor = true;
@@ -120,7 +122,7 @@ namespace pien_herkun_softa
             this.previewGrid.Name = "previewGrid";
             this.previewGrid.RowHeadersWidth = 51;
             this.previewGrid.RowTemplate.Height = 32;
-            this.previewGrid.Size = new System.Drawing.Size(1043, 585);
+            this.previewGrid.Size = new System.Drawing.Size(1043, 578);
             this.previewGrid.TabIndex = 0;
             // 
             // textBoxReceiver
@@ -142,27 +144,27 @@ namespace pien_herkun_softa
             // recieverLabel
             // 
             this.recieverLabel.AutoSize = true;
-            this.recieverLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.recieverLabel.Location = new System.Drawing.Point(8, 23);
+            this.recieverLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.recieverLabel.Location = new System.Drawing.Point(18, 22);
             this.recieverLabel.Name = "recieverLabel";
-            this.recieverLabel.Size = new System.Drawing.Size(189, 31);
+            this.recieverLabel.Size = new System.Drawing.Size(162, 29);
             this.recieverLabel.TabIndex = 3;
             this.recieverLabel.Text = "Vastaanottaja:";
             // 
             // dateLabel
             // 
             this.dateLabel.AutoSize = true;
-            this.dateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.dateLabel.Location = new System.Drawing.Point(31, 75);
+            this.dateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.dateLabel.Location = new System.Drawing.Point(35, 74);
             this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(166, 31);
+            this.dateLabel.Size = new System.Drawing.Size(145, 29);
             this.dateLabel.TabIndex = 4;
             this.dateLabel.Text = "Päivämäärä:";
             // 
             // generatePDFButton
             // 
             this.generatePDFButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.generatePDFButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.generatePDFButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline);
             this.generatePDFButton.Location = new System.Drawing.Point(851, 5);
             this.generatePDFButton.Name = "generatePDFButton";
             this.generatePDFButton.Size = new System.Drawing.Size(197, 64);
@@ -341,11 +343,11 @@ namespace pien_herkun_softa
             this.tabProductList.Controls.Add(this.websiteLinkLabel);
             this.tabProductList.Controls.Add(this.checkBox1);
             this.tabProductList.Controls.Add(this.productList);
-            this.tabProductList.Location = new System.Drawing.Point(4, 22);
+            this.tabProductList.Location = new System.Drawing.Point(4, 29);
             this.tabProductList.Margin = new System.Windows.Forms.Padding(2);
             this.tabProductList.Name = "tabProductList";
             this.tabProductList.Padding = new System.Windows.Forms.Padding(2);
-            this.tabProductList.Size = new System.Drawing.Size(1056, 735);
+            this.tabProductList.Size = new System.Drawing.Size(1056, 728);
             this.tabProductList.TabIndex = 0;
             this.tabProductList.Text = "Tuote Lista";
             this.tabProductList.UseVisualStyleBackColor = true;
@@ -366,7 +368,7 @@ namespace pien_herkun_softa
             this.productlistbuttonTable.Controls.Add(this.refreshButton, 4, 0);
             this.productlistbuttonTable.Controls.Add(this.editButton, 2, 0);
             this.productlistbuttonTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.productlistbuttonTable.Location = new System.Drawing.Point(2, 643);
+            this.productlistbuttonTable.Location = new System.Drawing.Point(2, 636);
             this.productlistbuttonTable.Name = "productlistbuttonTable";
             this.productlistbuttonTable.RowCount = 1;
             this.productlistbuttonTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -448,7 +450,7 @@ namespace pien_herkun_softa
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.checkBox1.Location = new System.Drawing.Point(4, 618);
+            this.checkBox1.Location = new System.Drawing.Point(4, 611);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(214, 22);
             this.checkBox1.TabIndex = 9;
@@ -466,7 +468,7 @@ namespace pien_herkun_softa
             this.productList.Location = new System.Drawing.Point(4, 5);
             this.productList.Margin = new System.Windows.Forms.Padding(2);
             this.productList.Name = "productList";
-            this.productList.Size = new System.Drawing.Size(1048, 608);
+            this.productList.Size = new System.Drawing.Size(1048, 601);
             this.productList.TabIndex = 7;
             this.productList.UseCompatibleStateImageBehavior = false;
             this.productList.SelectedIndexChanged += new System.EventHandler(this.productList_SelectedIndexChanged);
@@ -477,6 +479,7 @@ namespace pien_herkun_softa
             this.tabMain.Controls.Add(this.tabEditProduct);
             this.tabMain.Controls.Add(this.tabPDF);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.tabMain.ImeMode = System.Windows.Forms.ImeMode.On;
             this.tabMain.Location = new System.Drawing.Point(0, 0);
             this.tabMain.Margin = new System.Windows.Forms.Padding(2);
@@ -484,6 +487,17 @@ namespace pien_herkun_softa
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(1064, 761);
             this.tabMain.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Location = new System.Drawing.Point(423, 701);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(213, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Voit muokata yllä olevia tietoja  ^";
             // 
             // Form1
             // 
@@ -545,6 +559,7 @@ namespace pien_herkun_softa
         private CheckBox checkBox1;
         private TableLayoutPanel productlistbuttonTable;
         private TableLayoutPanel tableLayoutPanel1;
+        private Label label1;
     }
 }
 

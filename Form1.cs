@@ -317,7 +317,6 @@ namespace pien_herkun_softa
             }
 
             SaveLocalProducts();
-            MessageBox.Show("Tuote tallennettu.");
 
             editingProduct = null;
             tabMain.SelectedTab = tabProductList;

@@ -1,4 +1,6 @@
 <Solution>
-  <Project Path="../pien_herkun_softa_Setup/pien_herkun_softa_Setup.vdproj" Type="Installer" />
+  <Project Path="../pien_herkun_softa_Setup/pien_herkun_softa_Setup.vdproj" Type="Installer">
+    <Build />
+  </Project>
   <Project Path="pien herkun softa.csproj" Id="c4e5da56-26ab-4b31-913f-2888646fa2a7" />
 </Solution>
